@@ -16,10 +16,6 @@
 
   <style>
     #thisbody {
-      /* background: #24C6DC; 
-      background: -webkit-linear-gradient(to right, #514A9D, #24C6DC); 
-      background: linear-gradient(to right, #514A9D, #24C6DC); */
-
       background: #5C258D; 
       background: -webkit-linear-gradient(to right, #4389A2, #5C258D); 
       background: linear-gradient(to right, #4389A2, #5C258D);
