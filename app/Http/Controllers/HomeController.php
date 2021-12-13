@@ -24,7 +24,7 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        if(!(isset($_SESSION['user_data']))) {
+        if(!(isset($_SESSION['is_login']))) {
             return redirect('/')->with('error', 'Silahkan melakukan login ulang');
         }
 
