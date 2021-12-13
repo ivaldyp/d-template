@@ -46,6 +46,21 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
+        'internals' => [
+            'driver' => 'session',
+            'provider' => 'internals',
+        ],
+
+        'eksternal' => [
+            'driver' => 'session',
+            'provider' => 'eksternals',
+        ],
     ],
 
     /*
@@ -69,6 +84,21 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Login_admin::class,
+        ],
+
+        'internals' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Login_internal::class,
+        ],
+
+        'eksternals' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Login_eksternal::class,
         ],
 
         // 'users' => [
