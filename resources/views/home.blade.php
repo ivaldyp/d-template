@@ -9,6 +9,7 @@
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->
+	<input type="hidden" id="activemenus" value="{{ $activemenus }}">
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
@@ -70,4 +71,5 @@
 	<script src="{{ asset('lte/dist/js/adminlte.min.js') }}"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="{{ asset('lte/dist/js/demo.js') }}"></script>
+	@include('layouts.activate-menu')
 @endsection

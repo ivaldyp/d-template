@@ -56,14 +56,18 @@ class LandingController extends Controller
 
 		if (is_null($user)) {
 			session_destroy();
-			return redirect('/')->with('error', 'Username Tidak Ditemukan');
+			return back()
+					->with('error', 'Username Tidak Ditemukan')
+					->withInput($request->input());
 		} else {
 			if ($px == 'rprikat2017' || $px == 'BPAD@2022!@' || md5($px) == $user['passmd5']) {
 				$_SESSION['is_login'] = 1;
 				return redirect('/home')->with('success', 'Login Berhasil');
 			} else {
 				session_destroy();
-				return redirect('/')->with('error', 'Password Salah');
+				return back()
+						->with('error', 'Password Salah')
+						->withInput($request->input());
 			}
 		}
 	}
@@ -71,7 +75,7 @@ class LandingController extends Controller
 	public function logout(Request $request)
 	{
 		session_destroy();
-		return redirect('/');
+		return redirect()->action('LandingController@index');
 
 		if (Auth::guard('admin')->check()) {
 			Auth::guard('admin')->logout();

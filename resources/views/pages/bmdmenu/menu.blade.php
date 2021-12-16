@@ -8,6 +8,7 @@
 @endsection
 
 @section('content')
+  <input type="hidden" id="activemenus" value="{{ $activemenus }}">
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -290,8 +291,8 @@
   </div>
   <!-- /.content-wrapper -->
 @endsection
-
-@section('js')
+  
+  @section('js')
 	<!-- jQuery -->
 	<script src="{{ asset('lte/plugins/jquery/jquery.min.js') }}"></script>
 	<!-- Bootstrap 4 -->
@@ -300,6 +301,7 @@
 	<script src="{{ asset('lte/dist/js/adminlte.min.js') }}"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="{{ asset('lte/dist/js/demo.js') }}"></script>
+  @include('layouts.activate-menu')
 
   <script>
 		$(function () {

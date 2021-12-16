@@ -10,10 +10,14 @@ use Auth;
 
 use App\Models\Sec_menu;
 
+use App\Traits\TraitsCheckActiveMenu;
+
 session_start();
 
 class MenuController extends Controller
 {
+	use TraitsCheckActiveMenu;
+	
     public function display_roles($query, $idgroup, $parent, $level = 0)
     {
         if ($parent == 0) {
@@ -70,8 +74,10 @@ class MenuController extends Controller
     }
 
     public function menuall(Request $request)
-	{
-        if(!(isset($_SESSION['user_data']))) {
+	{	
+		$activemenus = $this->checkactivemenu(config('app.name'), url()->current()); 
+     
+		if(!(isset($_SESSION['bmd_data']))) {
             return redirect('/')->with('error', 'Silahkan melakukan login ulang');
         }
 
@@ -83,14 +89,15 @@ class MenuController extends Controller
         //             where('sts', 1)
         //             ->orderByRaw('coalesce(urut, ids, sao), sao, ids, urut')
         //             ->get();
-		
+
 		return view('pages.bmdmenu.menu')
-				->with('menus', $menus);
+				->with('menus', $menus)
+				->with('activemenus', $activemenus);
 	}
 
     public function forminsertmenu(Request $request)
 	{
-		if(!(isset($_SESSION['user_data']))) {
+		if(!(isset($_SESSION['bmd_data']))) {
             return redirect('/')->with('error', 'Silahkan melakukan login ulang');
         }
 
@@ -113,7 +120,7 @@ class MenuController extends Controller
 
 		$insert = [
 				'sts'       => 1,
-				'uname'     => $_SESSION['user_data']['usname'],
+				'uname'     => $_SESSION['bmd_data']['usname'],
 				'tgl'       => date('Y-m-d H:i:s'),
 				'ip'        => '',
 				'logbuat'   => '',
@@ -151,7 +158,7 @@ class MenuController extends Controller
 
     public function formupdatemenu(Request $request)
 	{
-		if(!(isset($_SESSION['user_data']))) {
+		if(!(isset($_SESSION['bmd_data']))) {
             return redirect('/')->with('error', 'Silahkan melakukan login ulang');
         }
 
@@ -191,7 +198,7 @@ class MenuController extends Controller
 
     public function formdeletemenu(Request $request)
     {
-        if(!(isset($_SESSION['user_data']))) {
+        if(!(isset($_SESSION['bmd_data']))) {
             return redirect('/')->with('error', 'Silahkan melakukan login ulang');
         }
 

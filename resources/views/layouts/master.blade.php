@@ -9,11 +9,12 @@
 	@yield('css')
 	<!-- /CSS -->
 </head>
-<body class="hold-transition sidebar-mini sidebar-collapse layout-fixed">
+<body class="hold-transition sidebar-mini sidebar-collapse layout-fixed dark-mode">
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <!-- <nav class="main-header navbar navbar-expand navbar-white navbar-light"> -->
+  <nav class="main-header navbar navbar-expand navbar-dark">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -78,10 +79,10 @@
         </div>
         <div class="info">
           <a href="javascript:void(0)" class="d-block">
-						@if(isset($_SESSION['user_data']['id_emp']))
-							{{ strtoupper($_SESSION['user_data']['nm_emp']) }}
-						@elseif(isset($_SESSION['user_data']['usname']))
-							{{ strtoupper($_SESSION['user_data']['usname']) }}
+						@if(isset($_SESSION['bmd_data']['id_emp']))
+							{{ strtoupper($_SESSION['bmd_data']['nm_emp']) }}
+						@elseif(isset($_SESSION['bmd_data']['usname']))
+							{{ strtoupper($_SESSION['bmd_data']['usname']) }}
 						@endif
 					</a>
         </div>
@@ -89,47 +90,8 @@
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-table"></i>
-              <p>
-                Laporan
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="../tables/simple.html" class="nav-link">
-                  <i class="fa fa-caret-right nav-icon"></i>
-                  <p>Simple Tables</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../tables/data.html" class="nav-link">
-                  <i class="fa fa-caret-right nav-icon"></i>
-                  <p>DataTables</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="../tables/jsgrid.html" class="nav-link">
-                  <i class="fa fa-caret-right nav-icon"></i>
-                  <p>jsGrid</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+        {!! $_SESSION['bmd_menus'] !!}
+        
       </nav>
       <!-- /.sidebar-menu -->
     </div>
