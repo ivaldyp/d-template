@@ -104,6 +104,19 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'server88' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => '10.15.36.18',
+            'port' => '1434',
+            'database' => '',
+            'username' => 'bpad_simaster',
+            'password' => '*indidok2019_',
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+        ],
+
     ],
 
     /*

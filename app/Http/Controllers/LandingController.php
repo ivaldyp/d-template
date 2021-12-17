@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Login_admin;
 use App\Models\Login_internal;
+use App\Models\Master_Profile;
+use App\Models\Master_User;
 use Auth;
 
 session_start();
@@ -30,23 +32,35 @@ class LandingController extends Controller
 		$ux = $request->username;
 		$px = $request->password;
 
+		// login pake nrk
 		if (is_numeric($ux) && strlen($ux) == 6) {
 			$user = Login_internal::where('nrk_emp', $ux)->first(['passmd5', 'id_emp']);
 			$_SESSION['id_emp'] = $user['id_emp'];
 			$_SESSION['usname'] = null;
 			$_SESSION['id_skpd'] = null;
+
+		// login pake skpd
 		} elseif (strlen($ux) == 6 && is_numeric(substr($ux, 0, 5))) {
-			// Cari Kolok
+			$user = Master_user::where('usname', $ux)->first(['passmd5', 'usname']);
+			$_SESSION['id_emp'] = null;
+			$_SESSION['usname'] = null;
+			$_SESSION['id_skpd'] = $user['usname'];
+
+		// login pake nip
 		} elseif (is_numeric($ux) && strlen($ux) == 18) {
 			$user = Login_internal::where('nip_emp', $ux)->first(['passmd5', 'id_emp']);
 			$_SESSION['id_emp'] = $user['id_emp'];
 			$_SESSION['usname'] = null;
 			$_SESSION['id_skpd'] = null;
+
+		// login pake id_emp
 		} elseif (substr($ux, 1, 1) == '.') {
 			$user = Login_internal::where('id_emp', $ux)->first(['passmd5', 'id_emp']);
 			$_SESSION['id_emp'] = $user['id_emp'];
 			$_SESSION['usname'] = null;
 			$_SESSION['id_skpd'] = null;
+
+		// login akun admin
 		} else {
 			$user = Login_admin::where('usname', $ux)->first(['passmd5', 'usname']);
 			$_SESSION['id_emp'] = null;

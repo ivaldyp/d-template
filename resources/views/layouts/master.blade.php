@@ -83,6 +83,8 @@
 							{{ strtoupper($_SESSION['bmd_data']['nm_emp']) }}
 						@elseif(isset($_SESSION['bmd_data']['usname']))
 							{{ strtoupper($_SESSION['bmd_data']['usname']) }}
+            @elseif(isset($_SESSION['bmd_data']['nalok']))
+              {{ strtoupper($_SESSION['bmd_data']['nalok']) }}
 						@endif
 					</a>
         </div>

@@ -12,6 +12,8 @@ use App\Models\Emp_data;
 use App\Models\Emp_jab;
 use App\Models\Glo_org_unitkerja;
 use App\Models\Sec_logins;
+use App\Models\Master_Profile;
+use App\Models\Master_User;
 
 use App\Traits\TraitsCheckActiveMenu;
 
@@ -94,6 +96,7 @@ class HomeController extends Controller
 	
     public function index(Request $request)
     {
+		
 		$activemenus = $this->checkactivemenu(config('app.name'), url()->current()); 
         
 		if(!(isset($_SESSION['is_login']))) {
@@ -120,9 +123,14 @@ class HomeController extends Controller
             $user_data = json_decode(json_encode($user_data), true);
 
         } elseif (isset($_SESSION['id_skpd']) && $_SESSION['id_skpd'] != '') {	
+			$iduser = substr($_SESSION['id_skpd'], 0, 5);
             $idgroup = "(is_skpd = 1)";
+
+			$user_data = Master_profile::
+						where('id_kolok', $iduser)
+						->first();
         } else {
-            $iduser = $_SESSION['usname'];;
+            $iduser = $_SESSION['usname'];
             $idgroup = "(is_admin = 1)";
 
 			$user_data = Sec_logins::
